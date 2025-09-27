@@ -23,7 +23,7 @@ router = APIRouter()
 conversations_storage: dict = {}
 
 
-@router.post("/", response_model=ConversationResponse)
+@router.post("/message", response_model=ConversationResponse)
 async def chat_with_medical_agent(request: ConversationRequest):
     """
     Endpoint principal para conversación médica
@@ -84,7 +84,7 @@ async def chat_with_medical_agent(request: ConversationRequest):
         conversations_storage[conversation_id]["updated_at"] = datetime.now()
         
         # Evaluar severidad
-        severity = agent.assess_urgency(request.message, request.patient_context or {})
+        severity = await agent.assess_urgency(request.message, request.patient_context or {})
         
         # Generar sugerencias de seguimiento
         follow_up_questions = _generate_follow_up_questions(

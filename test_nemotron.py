@@ -1,12 +1,11 @@
-#!/usr/bin/env python3
 """
-Script para probar DiagnostiCAT con Nemotron
+Prueba de integración con NVIDIA Nemotron
 """
 
-import requests
+import asyncio
 import json
-import os
-from typing import Dict
+from app.services.nemotron_service import nemotron_service
+from app.core.config import settings
 
 BASE_URL = "http://localhost:8000"
 

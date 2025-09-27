@@ -14,6 +14,7 @@ class AgentType(str, Enum):
     SPECIALIST = "specialist"
     EMERGENCY_DOCTOR = "emergency_doctor"
     MENTAL_HEALTH = "mental_health"
+    TRIAGE_NURSE = "triage_nurse"
 
 
 class AgentStatus(str, Enum):
@@ -48,6 +49,8 @@ class AgentResponse(BaseModel):
     processing_time: float  # en segundos
     tokens_used: int
     timestamp: datetime = Field(default_factory=datetime.now)
+    urgency_level: Optional[str] = "medio"
+    recommendations: Optional[List[str]] = []
     
     class Config:
         json_encoders = {
